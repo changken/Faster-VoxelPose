@@ -18,7 +18,7 @@ class ProjectLayer(nn.Module):
         self.heatmap_size = cfg.NETWORK.HEATMAP_SIZE
         self.ori_image_width = cfg.DATASET.ORI_IMAGE_WIDTH
         self.ori_image_height = cfg.DATASET.ORI_IMAGE_HEIGHT
-        self.device = torch.device(int(cfg.GPUS.split(',')[0]))
+        self.device = torch.device("cuda" if int(cfg.GPUS.split(',')[0]) >= 0 else "cpu")
 
         # constants for back-projection
         self.whole_space_center = torch.tensor(cfg.CAPTURE_SPEC.SPACE_CENTER, device=self.device)

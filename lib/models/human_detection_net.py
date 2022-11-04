@@ -16,7 +16,7 @@ class ProposalLayer(nn.Module):
         super(ProposalLayer, self).__init__()
         self.max_people = cfg.CAPTURE_SPEC.MAX_PEOPLE
         self.min_score = cfg.CAPTURE_SPEC.MIN_SCORE
-        self.device = torch.device(int(cfg.GPUS.split(',')[0]))
+        self.device = torch.device("cuda" if int(cfg.GPUS.split(',')[0]) >= 0 else "cpu")
 
         # constants for getting real coordinates
         self.scale = (torch.tensor(cfg.CAPTURE_SPEC.SPACE_SIZE) / (torch.tensor(cfg.CAPTURE_SPEC.VOXELS_PER_AXIS) - 1)).to(self.device) 

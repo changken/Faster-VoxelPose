@@ -65,6 +65,7 @@ class JointsDataset(Dataset):
 
     def _rebuild_db(self):
         for idx in range(len(self.db)):
+            input_heatmaps = []
             db_rec = self.db[idx]
 
             if self.input_heatmap_src == 'image':

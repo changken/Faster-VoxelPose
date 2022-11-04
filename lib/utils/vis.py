@@ -147,6 +147,8 @@ def save_debug_2d_images(config, meta, final_poses, poses, proposal_centers, pre
                         ax.plot(x, y, c='r', ls='--', lw=1.5, marker='o', markerfacecolor='w', markersize=2,
                                 markeredgewidth=1)
         
+        # fix problem by changken
+        proposal_centers = proposal_centers.cpu().numpy()
         # bbox visualization
         for j in range(len(proposal_centers[i])):
             if proposal_centers[i, j, 3] < 0:
