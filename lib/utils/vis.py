@@ -148,17 +148,18 @@ def save_debug_2d_images(config, meta, final_poses, poses, proposal_centers, pre
                                 markeredgewidth=1)
         
         # fix problem by changken
-        proposal_centers = proposal_centers.cpu().numpy()
+        proposal_centers2 = proposal_centers.cpu().numpy()
         # bbox visualization
-        for j in range(len(proposal_centers[i])):
-            if proposal_centers[i, j, 3] < 0:
+        for j in range(len(proposal_centers2[i])):
+            if proposal_centers2[i, j, 3] < 0:
                 continue
-            top_left_x = proposal_centers[i, j, 0] - proposal_centers[i, j, 5] * individual_space_size[0] / 2
-            top_left_y = proposal_centers[i, j, 1] - proposal_centers[i, j, 6] * individual_space_size[1] / 2
-            width = proposal_centers[i, j, 5] * individual_space_size[0]
-            height = proposal_centers[i, j, 6] * individual_space_size[1]
+            top_left_x = proposal_centers2[i, j, 0] - proposal_centers2[i, j, 5] * individual_space_size[0] / 2
+            top_left_y = proposal_centers2[i, j, 1] - proposal_centers2[i, j, 6] * individual_space_size[1] / 2
+            width = proposal_centers2[i, j, 5] * individual_space_size[0]
+            height = proposal_centers2[i, j, 6] * individual_space_size[1]
             rect = plt.Rectangle((top_left_x, top_left_y), width, height, fill=False, edgecolor = 'red',linewidth=1)
             ax.add_patch(rect)
+        del proposal_centers2
 
         for n, joint in enumerate(curr_poses[0]):
             for k in eval("LIMBS{}".format(len(joint))):
@@ -186,15 +187,17 @@ def save_debug_2d_images(config, meta, final_poses, poses, proposal_centers, pre
                         ax.plot(x, z, c='r', ls='--', lw=1.5, marker='o', markerfacecolor='w', markersize=2,
                                 markeredgewidth=1)
 
-        for j in range(len(proposal_centers[i])):
-            if proposal_centers[i, j, 3] < 0:
+        proposal_centers2 = proposal_centers.cpu().numpy()
+        for j in range(len(proposal_centers2[i])):
+            if proposal_centers2[i, j, 3] < 0:
                 continue
-            top_left_x = proposal_centers[i, j, 0] - proposal_centers[i, j, 5] * individual_space_size[0] / 2
-            top_left_y = proposal_centers[i, j, 2] - individual_space_size[2] / 2
-            width = proposal_centers[i, j, 5] * individual_space_size[0]
+            top_left_x = proposal_centers2[i, j, 0] - proposal_centers2[i, j, 5] * individual_space_size[0] / 2
+            top_left_y = proposal_centers2[i, j, 2] - individual_space_size[2] / 2
+            width = proposal_centers2[i, j, 5] * individual_space_size[0]
             height = individual_space_size[2]
             rect = plt.Rectangle((top_left_x, top_left_y), width, height, fill=False, edgecolor = 'red',linewidth=1)
             ax.add_patch(rect)
+        del proposal_centers2
         
         for n, joint in enumerate(curr_poses[1]):
             for k in eval("LIMBS{}".format(len(joint))):
@@ -221,15 +224,17 @@ def save_debug_2d_images(config, meta, final_poses, poses, proposal_centers, pre
                         ax.plot(y, z, c='r', ls='--', lw=1.5, marker='o', markerfacecolor='w', markersize=2,
                                 markeredgewidth=1)
 
-        for j in range(len(proposal_centers[i])):
-            if proposal_centers[i, j, 3] < 0:
+        proposal_centers2 = proposal_centers.cpu().numpy()
+        for j in range(len(proposal_centers2[i])):
+            if proposal_centers2[i, j, 3] < 0:
                 continue
-            top_left_x = proposal_centers[i, j, 1] - proposal_centers[i, j, 6] * individual_space_size[1] / 2
-            top_left_y = proposal_centers[i, j, 2] - individual_space_size[2] / 2
-            width = proposal_centers[i, j, 6] * individual_space_size[1]
+            top_left_x = proposal_centers2[i, j, 1] - proposal_centers2[i, j, 6] * individual_space_size[1] / 2
+            top_left_y = proposal_centers2[i, j, 2] - individual_space_size[2] / 2
+            width = proposal_centers2[i, j, 6] * individual_space_size[1]
             height = individual_space_size[2]
             rect = plt.Rectangle((top_left_x, top_left_y), width, height, fill=False, edgecolor = 'red',linewidth=1)
             ax.add_patch(rect)
+        del proposal_centers2
 
         for n, joint in enumerate(curr_poses[2]):
             for k in eval("LIMBS{}".format(len(joint))):

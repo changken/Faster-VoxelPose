@@ -14,7 +14,7 @@ PRINT_FREQ: 100
 
 DATASET:
   COLOR_RGB: True
-  ROOT: "data/Panoptic"
+  ROOT: 'data/Panoptic'
   TRAIN_DATASET: 'panoptic'
   TRAIN_HEATMAP_SRC: 'image'
   TEST_DATASET: 'panoptic'
@@ -25,13 +25,13 @@ DATASET:
   ORI_IMAGE_HEIGHT: 1080
 
 NETWORK:
-  PRETRAINED_BACKBONE: "models/pose_resnet50_panoptic.pth.tar"
+  PRETRAINED_BACKBONE: 'models/pose_resnet50_panoptic.pth.tar'
   IMAGE_SIZE:
-  - 960
-  - 512
+    - 960
+    - 512
   HEATMAP_SIZE:
-  - 240
-  - 128
+    - 240
+    - 128
   NUM_JOINTS: 15
   SIGMA: 3
 
@@ -63,7 +63,7 @@ CAPTURE_SPEC:
     - 20
   MAX_PEOPLE: 10
   MIN_SCORE: 0.3
-  
+
 INDIVIDUAL_SPEC:
   SPACE_SIZE:
     - 2000.0
